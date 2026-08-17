@@ -162,7 +162,7 @@ Tmypromise.then((msg)=>{
     }
 }
 handleData();*/
-function orderReceive() {
+/*function orderReceive() {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve("Order received");
@@ -183,7 +183,7 @@ async function orderHandler() {
 orderReceive().then((msg)=>{
     console.log(msg)
 }).catch((err)=>)*/
-function orderPrepare() {
+/*1.function orderPrepare() {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve("Order Prepared");
@@ -199,7 +199,7 @@ async function order1Handler() {
         console.log(err);
     }
 }
-function orderSpatch() {
+function orderDispatch() {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve("Order Spatch");
@@ -209,7 +209,7 @@ function orderSpatch() {
 
 async function order2Handler() {
     try {
-        const akm = await orderSpatch();
+        const akm = await orderDispatch();
         console.log(akm);
     } catch (err) {
         console.log(err);
@@ -217,4 +217,58 @@ async function order2Handler() {
 }
 orderHandler();
 order1Handler();
-order2Handler();
+order2Handler();*/
+/*const button=document.getElementById('btn')
+const container=document.getElementById('container')
+console.log(button)
+console.log(container)
+async function fetchData(){
+    const serverData= await fetch('https://fakestoreapi.com/products/')
+            const jsonData =await serverData.json();
+    //console.log(jsonData)
+    container.innerHTML=JSON.stringify(`${jsonData}`)
+
+}
+button.addEventListener('click',fetchData)
+//fetchData();*/
+const button = document.getElementById("btn");
+const container = document.getElementById("container");
+console.log(button);
+const loading=document.createElement('div');
+container.appendChild(loading);
+
+async function fetchData() {
+    loading.innerHTML="<h2>Loading Data...<h2>";
+    const serverData = await fetch('https://fakestoreapi.com/products');
+    const jsonData = await serverData.json();
+    console.log(jsonData);
+    //container.innerHTML=JSON.stringify(jsonData);
+    let table=`<table border="4px">
+        <tr><td>ITEM_ID</td><td>
+            TITLE</td><td>PRICE</td></tr>
+            ${
+                jsonData.map((ele)=>(
+                    `<tr>
+                        <td>
+                        <img src= ${ele.image} height="100px" width="100px" alt='cloth'/>
+                        </td>
+                        
+                        <td>
+                            ${ele.id}
+                        </td>
+                        <td>
+                            ${ele.title}
+                        </td>
+                        <td>
+                            ${ele.price}
+                        </td>
+                    </tr>`
+                ))
+            }
+    </table>`
+    container.innerHTML=table;
+
+        }
+button.addEventListener("click", fetchData);
+// fetchData();
+
